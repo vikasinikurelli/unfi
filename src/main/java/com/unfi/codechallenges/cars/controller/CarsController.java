@@ -32,14 +32,14 @@ public class CarsController {
         return ResponseEntity.ok(carService.createCar(car));
     }
 
-    @PostMapping(path = "/update")
+    @PutMapping
     public ResponseEntity<CarDto> updateCar(@RequestBody CarDto car) {
         return ResponseEntity.ok(carService.update(car));
     }
 
-    @PostMapping(path = "/delete")
-    public ResponseEntity<CarDto> deleteCar(@RequestBody CarDto car) {
-        carService.delete(car);
+    @DeleteMapping
+    public ResponseEntity<CarDto> deleteCar(@RequestParam Long id) {
+        carService.delete(id);
         return ResponseEntity.ok(null);
     }
 
