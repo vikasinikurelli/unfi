@@ -6,7 +6,6 @@ import com.unfi.codechallenges.cars.repository.CarRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,19 +67,16 @@ public class CarService {
         }
     }
 
-    public List<CarDto> getAll() {
-        var allCars = carRepository.findAllByIsActiveTrue();
-        List<CarDto> cars = new ArrayList();
-        for (Car car : allCars) {
-            cars.add(CarDto.builder()
-                    .id(car.getId())
-                    .make(car.getMake())
-                    .model(car.getModel())
-                    .year(car.getYear())
-                    .vin(car.getVin())
-                    .build()
-            );
-        }
-        return cars;
+    public List<CarDto> getAllActiveCars() {
+        return carRepository.findAllByIsActiveTrue()
+                .stream().map(car ->
+                        CarDto.builder()
+                                .id(car.getId())
+                                .make(car.getMake())
+                                .model(car.getModel())
+                                .year(car.getYear())
+                                .vin(car.getVin())
+                                .build()
+                ).toList();
     }
 }

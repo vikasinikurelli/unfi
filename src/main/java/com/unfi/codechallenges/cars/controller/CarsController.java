@@ -2,10 +2,8 @@ package com.unfi.codechallenges.cars.controller;
 
 import com.unfi.codechallenges.cars.dto.CarDto;
 import com.unfi.codechallenges.cars.service.CarService;
-import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +24,7 @@ public class CarsController {
     @GetMapping
     public ResponseEntity<List<CarDto>> getAllCars() {
         log.info("Getting all active cars");
-        return ResponseEntity.ok(carService.getAll());
+        return ResponseEntity.ok(carService.getAllActiveCars());
     }
 
     @PostMapping
